@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>獨居守護 - 健康監護系統</title>
+    <meta name="theme-color" content="#3B82F6">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="獨居守護">
+    <link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTkyIiBoZWlnaHQ9IjE5MiIgdmlld0JveD0iMCAwIDE5MiAxOTIiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxOTIiIGhlaWdodD0iMTkyIiByeD0iNDAiIGZpbGw9IiMzQjgyRjYiLz4KPHN2ZyB4PSI0OCIgeT0iNDgiIHdpZHRoPSI5NiIgaZWlnaHQ9PSI5NiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJ3aGl0ZSI+CjxwYXRoIGQ9Ik0xMiAyMWMtMS4xIDAtMi0uOS0yLTJzLjktMiAyLTIgMiAuOSAyIDItLjkgMi0yIDJ6bTYtNmgtMi43Yy0uMy0xLjItMS4yLTItMi4zLTJzLTIgLjgtMi4zIDJINmMtMS4xIDAtMiAuOS0yIDJzLjkgMiAyIDJoMTJjMS4xIDAgMi0uOSAyLTJzLS45LTItMi0yeiIvPgo8L3N2Zz4KPC9zdmc+">
+    <link rel="manifest" href="data:application/json;base64,ewogICJuYW1lIjogIueLrOWxheWuiOitkCAtIOWBpeW6t+eboeitt+ezu+e1sSIsCiAgInNob3J0X25hbWUiOiAi54us5bGF5a6I6K2QIiwKICAic3RhcnRfdXJsIjogIi8iLAogICJkaXNwbGF5IjogInN0YW5kYWxvbmUiLAogICJiYWNrZ3JvdW5kX2NvbG9yIjogIiNmZmZmZmYiLAogICJ0aGVtZV9jb2xvciI6ICIjM0I4MkY2IiwKICAiaWNvbnMiOiBbCiAgICB7CiAgICAgICJzcmMiOiAiZGF0YTppbWFnZS9zdmcreG1sO2Jhc2U2NCxQSE4yWnlCM2FXUjBhRDBpTVRreUlpQm9aV2xuYUhROUlqRTVNaUlpSUhacFpYZENiM2c5SWpBZ01DQXhPVElnTVRreUlpQm1hV3hzUFNKdWIyNWxJaUI0Yld4dWN6MGlhSFIwY0RvdkwzZDNkeTUzTXk1dmNtY3ZNakF3TUM5emRtY2lQZ28xjcmVqZENCaWQzUjBhRDBpTVRreUlpQm9aV2xuYUhROUlqRTVNaUlpSUhKNFBTSTBNQ0lpSUdacGJHdzlJaU16UWpneVJqWWlMejRLUEhOMlp5QjRQU0kwT0NJZ2VUMGlORGdpSUhkcFpIUm9QU0k1TmlJZ2FHVnBaMmgwUFNJNU5pSWlJSFpwWlhkQ2IzZzlJakFnTUNBeU5DQXlOQ0lpSUdacGJHdzlJbmRvYVhSbElqNEtQSEJoZEdnZ1pEMGlUVEV5SURJeFl5MHhMakVnTUMweUxTNDVMVElnTWk1eklTNDVJRElnTWlBdU9TQXlJRElnTWkwdU9TQXlMVElnTWkxNmJUWXROaWd0TWk0M1l5MHVNeTB4TGpJdE1TNHlMVElnTWk0ekxUSXpJREl6TFRKekxUSWdMamd0TWk0eklESWdTRFpqTFRFdU1TQXdMVElnTGprdE1pQXljeUE1SURJZ01pMHljeTA1TFRJdE1pMHllaUlnTHo0S1BDOXpkbWMrQ2p3dmMzWm5QZ289IiwKICAgICAgInNpemVzIjogIjE5MngxOTIiLAogICAgICAidHlwZSI6ICJpbWFnZS9zdmcreG1sIgogICAgfQogIF0KfQ==">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;600;700&display=swap');
+        body { font-family: 'Noto Sans TC', sans-serif; }
+        .pulse-animation { animation: pulse 2s infinite; }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        .heartbeat { animation: heartbeat 1.5s ease-in-out infinite; }
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+        .slide-in { animation: slideIn 0.3s ease-out; }
+        @keyframes slideIn {
+            from { transform: translateY(-10px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen">
+    <!-- 主要應用介面 -->
+    <div id="mainApp" class="container mx-auto px-4 py-6 max-w-md">
+        <!-- 標題欄 -->
+        <div class="bg-white rounded-2xl shadow-lg p-6 mb-6">
+            <div class="flex items-center justify-between">
+                <div>
+                    <h1 class="text-2xl font-bold text-gray-800">獨居守護</h1>
+                    <p class="text-gray-600 text-sm">健康監護系統</p>
+                </div>
+                <div class="text-3xl heartbeat">❤️</div>
+            </div>
+        </div>
+
+        <!-- 狀態卡片 -->
+        <div class="bg-white rounded-2xl shadow-lg p-6 mb-6">
+            <div class="flex items-center justify-between mb-4">
+                <h2 class="text-lg font-semibold text-gray-800">目前狀態</h2>
+                <div id="statusIndicator" class="w-4 h-4 bg-green-500 rounded-full pulse-animation"></div>
+            </div>
+            
+            <div class="grid grid-cols-2 gap-4">
+                <div class="text-center p-3 bg-blue-50 rounded-xl">
+                    <div class="text-2xl mb-1">🚶‍♂️</div>
+                    <div class="text-sm text-gray-600">今日步數</div>
+                    <div id="stepCount" class="text-lg font-semibold text-blue-600">3,247</div>
+                </div>
+                <div class="text-center p-3 bg-green-50 rounded-xl">
+                    <div class="text-2xl mb-1">💓</div>
+                    <div class="text-sm text-gray-600">心率</div>
+                    <div id="heartRate" class="text-lg font-semibold text-green-600">72 bpm</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 活動監測 -->
+        <div class="bg-white rounded-2xl shadow-lg p-6 mb-6">
+            <h2 class="text-lg font-semibold text-gray-800 mb-4">活動監測</h2>
+            
+            <div class="space-y-3">
+                <div class="flex items-center justify-between p-3 bg-gray-50 rounded-xl">
+                    <div class="flex items-center">
+                        <span class="text-xl mr-3">🌅</span>
+                        <span class="text-gray-700">起床時間</span>
+                    </div>
+                    <span id="wakeTime" class="text-gray-600 font-medium">07:30</span>
+                </div>
+                
+                <div class="flex items-center justify-between p-3 bg-gray-50 rounded-xl">
+                    <div class="flex items-center">
+                        <span class="text-xl mr-3">🍽️</span>
+                        <span class="text-gray-700">用餐記錄</span>
+                    </div>
+                    <span id="mealStatus" class="text-green-600 font-medium">已用餐</span>
+                </div>
+                
+                <div class="flex items-center justify-between p-3 bg-gray-50 rounded-xl">
+                    <div class="flex items-center">
+                        <span class="text-xl mr-3">🏠</span>
+                        <span class="text-gray-700">居家活動</span>
+                    </div>
+                    <span id="homeActivity" class="text-blue-600 font-medium">正常</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 感測器控制 -->
+        <div class="bg-white rounded-2xl shadow-lg p-6 mb-6">
+            <h2 class="text-lg font-semibold text-gray-800 mb-4">感測器設定</h2>
+            <div class="space-y-3">
+                <button id="enableStepCounter" class="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-xl transition-colors duration-200">
+                    🚶‍♂️ 啟用步數計算
+                </button>
+                <button id="enableHeartRate" class="w-full bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-xl transition-colors duration-200">
+                    💓 啟用心率監測
+                </button>
+                <div id="sensorStatus" class="text-sm text-gray-600 text-center mt-2">
+                    點擊按鈕啟用真實感測器
+                </div>
+            </div>
+        </div>
+
+        <!-- 緊急按鈕 -->
+        <div class="bg-white rounded-2xl shadow-lg p-6 mb-6">
+            <h2 class="text-lg font-semibold text-gray-800 mb-4">緊急聯絡</h2>
+            <button id="emergencyBtn" class="w-full bg-red-500 hover:bg-red-600 text-white font-bold py-4 px-6 rounded-xl text-lg transition-colors duration-200">
+                🚨 緊急求助
+            </button>
+        </div>
+
+        <!-- 守護者聯絡 -->
+        <div class="bg-white rounded-2xl shadow-lg p-6">
+            <h2 class="text-lg font-semibold text-gray-800 mb-4">守護者</h2>
+            <div class="space-y-3">
+                <div class="flex items-center justify-between p-3 bg-blue-50 rounded-xl">
+                    <div class="flex items-center">
+                        <div class="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center text-white font-semibold mr-3">李</div>
+                        <div>
+                            <div class="font-medium text-gray-800">李小明</div>
+                            <div class="text-sm text-gray-600">兒子</div>
+                        </div>
+                    </div>
+                    <button class="text-blue-500 hover:text-blue-600 text-xl">📞</button>
+                </div>
+                
+                <div class="flex items-center justify-between p-3 bg-green-50 rounded-xl">
+                    <div class="flex items-center">
+                        <div class="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center text-white font-semibold mr-3">王</div>
+                        <div>
+                            <div class="font-medium text-gray-800">王護理師</div>
+                            <div class="text-sm text-gray-600">照護員</div>
+                        </div>
+                    </div>
+                    <button class="text-green-500 hover:text-green-600 text-xl">📞</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 守護者介面 -->
+    <div id="guardianApp" class="container mx-auto px-4 py-6 max-w-md hidden">
+        <!-- 守護者標題 -->
+        <div class="bg-white rounded-2xl shadow-lg p-6 mb-6">
+            <div class="flex items-center justify-between">
+                <div>
+                    <h1 class="text-2xl font-bold text-gray-800">守護者介面</h1>
+                    <p class="text-gray-600 text-sm">監護 - 李奶奶</p>
+                </div>
+                <button id="switchToMain" class="text-blue-500 hover:text-blue-600">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- 警報狀態 -->
+        <div class="bg-white rounded-2xl shadow-lg p-6 mb-6">
+            <h2 class="text-lg font-semibold text-gray-800 mb-4">警報狀態</h2>
+            <div id="alertStatus" class="p-4 bg-green-50 border-l-4 border-green-500 rounded-r-xl">
+                <div class="flex items-center">
+                    <span class="text-green-500 text-xl mr-3">✅</span>
+                    <div>
+                        <div class="font-medium text-green-800">狀態正常</div>
+                        <div class="text-sm text-green-600">最後更新：剛剛</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 活動摘要 -->
+        <div class="bg-white rounded-2xl shadow-lg p-6 mb-6">
+            <h2 class="text-lg font-semibold text-gray-800 mb-4">今日活動摘要</h2>
+            <div class="space-y-4">
+                <div class="flex items-center justify-between">
+                    <span class="text-gray-700">起床時間</span>
+                    <span class="font-medium text-gray-800">07:30 ✅</span>
+                </div>
+                <div class="flex items-center justify-between">
+                    <span class="text-gray-700">活動量</span>
+                    <span class="font-medium text-blue-600">3,247 步</span>
+                </div>
+                <div class="flex items-center justify-between">
+                    <span class="text-gray-700">用餐狀況</span>
+                    <span class="font-medium text-green-600">正常 ✅</span>
+                </div>
+                <div class="flex items-center justify-between">
+                    <span class="text-gray-700">心率範圍</span>
+                    <span class="font-medium text-green-600">65-78 bpm</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 異常偵測設定 -->
+        <div class="bg-white rounded-2xl shadow-lg p-6">
+            <h2 class="text-lg font-semibold text-gray-800 mb-4">監護設定</h2>
+            <div class="space-y-4">
+                <div class="flex items-center justify-between">
+                    <span class="text-gray-700">活動異常警報</span>
+                    <label class="relative inline-flex items-center cursor-pointer">
+                        <input type="checkbox" checked class="sr-only peer">
+                        <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
+                    </label>
+                </div>
+                
+                <div class="flex items-center justify-between">
+                    <span class="text-gray-700">心率異常警報</span>
+                    <label class="relative inline-flex items-center cursor-pointer">
+                        <input type="checkbox" checked class="sr-only peer">
+                        <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
+                    </label>
+                </div>
+                
+                <div class="flex items-center justify-between">
+                    <span class="text-gray-700">長時間無活動警報</span>
+                    <label class="relative inline-flex items-center cursor-pointer">
+                        <input type="checkbox" checked class="sr-only peer">
+                        <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 警報彈窗 -->
+    <div id="alertModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 hidden z-50">
+        <div class="bg-white rounded-2xl p-6 max-w-sm w-full slide-in">
+            <div class="text-center">
+                <div class="text-6xl mb-4">🚨</div>
+                <h3 class="text-xl font-bold text-red-600 mb-2">緊急警報</h3>
+                <p class="text-gray-700 mb-6">已發送緊急通知給所有守護者</p>
+                <button id="closeAlert" class="w-full bg-red-500 hover:bg-red-600 text-white font-bold py-3 px-6 rounded-xl transition-colors duration-200">
+                    確認
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 安裝提示橫幅 -->
+    <div id="installBanner" class="fixed top-0 left-0 right-0 bg-blue-600 text-white p-3 z-50 hidden">
+        <div class="flex items-center justify-between max-w-md mx-auto">
+            <div class="flex items-center">
+                <span class="text-lg mr-2">📱</span>
+                <div class="text-sm">
+                    <div class="font-medium">安裝到手機</div>
+                    <div class="text-blue-100 text-xs">點擊安裝，像真正的APP一樣使用</div>
+                </div>
+            </div>
+            <div class="flex space-x-2">
+                <button id="installApp" class="bg-white text-blue-600 px-3 py-1 rounded-lg text-sm font-medium">
+                    安裝
+                </button>
+                <button id="dismissInstall" class="text-blue-100 hover:text-white">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 安裝說明彈窗 -->
+    <div id="installModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 hidden z-50">
+        <div class="bg-white rounded-2xl p-6 max-w-sm w-full slide-in">
+            <div class="text-center">
+                <div class="text-6xl mb-4">📱</div>
+                <h3 class="text-xl font-bold text-gray-800 mb-4">安裝到手機</h3>
+                
+                <!-- iOS 安裝說明 -->
+                <div id="iosInstructions" class="text-left space-y-3 mb-6 hidden">
+                    <p class="text-gray-700 text-sm font-medium">iPhone/iPad 安裝步驟：</p>
+                    <div class="space-y-2 text-sm text-gray-600">
+                        <div class="flex items-center">
+                            <span class="w-6 h-6 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-xs font-bold mr-3">1</span>
+                            <span>點擊 Safari 底部的「分享」按鈕 📤</span>
+                        </div>
+                        <div class="flex items-center">
+                            <span class="w-6 h-6 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-xs font-bold mr-3">2</span>
+                            <span>選擇「加入主畫面」</span>
+                        </div>
+                        <div class="flex items-center">
+                            <span class="w-6 h-6 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-xs font-bold mr-3">3</span>
+                            <span>點擊「新增」完成安裝</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Android 安裝說明 -->
+                <div id="androidInstructions" class="text-left space-y-3 mb-6 hidden">
+                    <p class="text-gray-700 text-sm font-medium">Android 安裝步驟：</p>
+                    <div class="space-y-2 text-sm text-gray-600">
+                        <div class="flex items-center">
+                            <span class="w-6 h-6 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-xs font-bold mr-3">1</span>
+                            <span>點擊 Chrome 右上角選單 ⋮</span>
+                        </div>
+                        <div class="flex items-center">
+                            <span class="w-6 h-6 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-xs font-bold mr-3">2</span>
+                            <span>選擇「安裝應用程式」</span>
+                        </div>
+                        <div class="flex items-center">
+                            <span class="w-6 h-6 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-xs font-bold mr-3">3</span>
+                            <span>點擊「安裝」完成</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 通用說明 -->
+                <div id="generalInstructions" class="text-left space-y-3 mb-6">
+                    <p class="text-gray-700 text-sm font-medium">安裝後的優點：</p>
+                    <div class="space-y-1 text-sm text-gray-600">
+                        <div class="flex items-center">
+                            <span class="text-green-500 mr-2">✓</span>
+                            <span>像真正的APP一樣使用</span>
+                        </div>
+                        <div class="flex items-center">
+                            <span class="text-green-500 mr-2">✓</span>
+                            <span>可離線使用部分功能</span>
+                        </div>
+                        <div class="flex items-center">
+                            <span class="text-green-500 mr-2">✓</span>
+                            <span>更快的啟動速度</span>
+                        </div>
+                        <div class="flex items-center">
+                            <span class="text-green-500 mr-2">✓</span>
+                            <span>全螢幕體驗</span>
+                        </div>
+                    </div>
+                </div>
+
+                <button id="closeInstallModal" class="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-xl transition-colors duration-200">
+                    我知道了
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 底部導航 -->
+    <div class="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 px-4 py-2">
+        <div class="flex justify-center space-x-8 max-w-md mx-auto">
+            <button id="showMain" class="flex flex-col items-center py-2 text-blue-500">
+                <span class="text-xl mb-1">🏠</span>
+                <span class="text-xs">主頁</span>
+            </button>
+            <button id="showGuardian" class="flex flex-col items-center py-2 text-gray-400 hover:text-blue-500">
+                <span class="text-xl mb-1">👥</span>
+                <span class="text-xs">守護者</span>
+            </button>
+            <button id="showInstallGuide" class="flex flex-col items-center py-2 text-gray-400 hover:text-green-500">
+                <span class="text-xl mb-1">📱</span>
+                <span class="text-xs">安裝APP</span>
+            </button>
+            <button id="simulateAlert" class="flex flex-col items-center py-2 text-gray-400 hover:text-orange-500">
+                <span class="text-xl mb-1">⚠️</span>
+                <span class="text-xs">測試警報</span>
+            </button>
+        </div>
+    </div>
