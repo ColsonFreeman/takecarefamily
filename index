@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>獨居守護 - 健康監護系統</title>
+    <meta name="theme-color" content="#3B82F6">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="獨居守護">
+    <link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTkyIiBoZWlnaHQ9IjE5MiIgdmlld0JveD0iMCAwIDE5MiAxOTIiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxOTIiIGhlaWdodD0iMTkyIiByeD0iNDAiIGZpbGw9IiMzQjgyRjYiLz4KPHN2ZyB4PSI0OCIgeT0iNDgiIHdpZHRoPSI5NiIgaGVpZ2h0PSI5NiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJ3aGl0ZSI+CjxwYXRoIGQ9Ik0xMiAyMWMtMS4xIDAtMi0uOS0yLTJzLjktMiAyLTIgMiAuOSAyIDItLjkgMi0yIDJ6bTYtNmgtMi43Yy0uMy0xLjItMS4yLTItMi4zLTJzLTIgLjgtMi4zIDJINmMtMS4xIDAtMiAuOS0yIDJzLjkgMiAyIDJoMTJjMS4xIDAgMi0uOSAyLTJzLS45LTItMi0yeiIvPgo8L3N2Zz4KPC9zdmc+">
+    <link rel="manifest" href="data:application/json;base64,ewogICJuYW1lIjogIueLrOWxheWuiOitkCAtIOWBpeW6t+eboeitt+ezu+e1sSIsCiAgInNob3J0X25hbWUiOiAi54us5bGF5a6I6K2QIiwKICAic3RhcnRfdXJsIjogIi8iLAogICJkaXNwbGF5IjogInN0YW5kYWxvbmUiLAogICJiYWNrZ3JvdW5kX2NvbG9yIjogIiNmZmZmZmYiLAogICJ0aGVtZV9jb2xvciI6ICIjM0I4MkY2IiwKICAiaWNvbnMiOiBbCiAgICB7CiAgICAgICJzcmMiOiAiZGF0YTppbWFnZS9zdmcreG1sO2Jhc2U2NCxQSE4yWnlCM2FXUjBhRDBpTVRreUlpQm9aV2xuYUhROUlqRTVNaUlpSUhacFpYZENiM2c5SWpBZ01DQXhPVElnTVRreUlpQm1hV3hzUFNKdWIyNWxJaUI0Yld4dWN6MGlhSFIwY0RvdkwzZDNkeTUzTXk1dmNtY3ZNakF3TUM5emRtY2lQZ28xjcmVqZENCaWQzUjBhRDBpTVRreUlpQm9aV2xuYUhROUlqRTVNaUlpSUhKNFBTSTBNQ0lpSUdacGJHdzlJaU16UWpneVJqWWlMejRLUEhOMlp5QjRQU0kwT0NJZ2VUMGlORGdpSUhkcFpIUm9QU0k1TmlJZ2FHVnBaMmgwUFNJNU5pSWlJSFpwWlhkQ2IzZzlJakFnTUNBeU5DQXlOQ0lpSUdacGJHdzlJbmRvYVhSbElqNEtQSEJoZEdnZ1pEMGlUVEV5SURJeFl5MHhMakVnTUMweUxTNDVMVElnTWk1eklTNDVJRElnTWlBdU9TQXlJRElnTWkwdU9TQXlMVElnTWkxNmJUWXROaWd0TWk0M1l5MHVNeTB4TGpJdE1TNHlMVElnTWk0ekxUSXpJREl6TFRKekxUSWdMamd0TWk0eklESWdTRFpqTFRFdU1TQXdMVElnTGprdE1pQXljeUE1SURJZ01pMHljeTA1TFRJdE1pMHllaUlnTHo0S1BDOXpkbWMrQ2p3dmMzWm5QZ289IiwKICAgICAgInNpemVzIjogIjE5MngxOTIiLAogICAgICAidHlwZSI6ICJpbWFnZS9zdmcreG1sIgogICAgfQogIF0KfQ==">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;600;700&display=swap');
+        body { font-family: 'Noto Sans TC', sans-serif; }
+        
+        .pulse-animation {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        
+        .heartbeat {
+            animation: heartbeat 1.5s ease-in-out infinite;
+        }
+        
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+        
+        .slide-in {
+            animation: slideIn 0.3s ease-out;
+        }
+        
+        @keyframes slideIn {
+            from { transform: translateY(-10px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen">
+    <!-- 主要應用介面 -->
+    <div id="mainApp" class="container mx-auto px-4 py-6 max-w-md">
+        <!-- 標題欄 -->
+        <div class="bg-white rounded-2xl shadow-lg p-6 mb-6">
+            <div class="flex items-center justify-between">
+                <div>
+                    <h1 class="text-2xl font-bold text-gray-800">獨居守護</h1>
+                    <p class="text-gray-600 text-sm">健康監護系統</p>
+                </div>
+                <div class="text-3xl heartbeat">❤️</div>
+            </div>
+        </div>
+
+        <!-- 狀態卡片 -->
+        <div class="bg-white rounded-2xl shadow-lg p-6 mb-6">
+            <div class="flex items-center justify-between mb-4">
+                <h2 class="text-lg font-semibold text-gray-800">目前狀態</h2>
+                <div id="statusIndicator" class="w-4 h-4 bg-green-500 rounded-full pulse-animation"></div>
+            </div>
+            
+            <div class="grid grid-cols-2 gap-4">
+                <div class="text-center p-3 bg-blue-50 rounded-xl">
+                    <div class="text-2xl mb-1">🚶‍♂️</div>
+                    <div class="text-sm text-gray-600">今日步數</div>
+                    <div id="stepCount" class="text-lg font-semibold text-blue-600">3,247</div>
+                </div>
+                <div class="text-center p-3 bg-green-50 rounded-xl">
+                    <div class="text-2xl mb-1">💓</div>
+                    <div class="text-sm text-gray-600">心率</div>
+                    <div id="heartRate" class="text-lg font-semibold text-green-600">72 bpm</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 活動監測 -->
+        <div class="bg-white rounded-2xl shadow-lg p-6 mb-6">
+            <h2 class="text-lg font-semibold text-gray-800 mb-4">活動監測</h2>
+            
+            <div class="space-y-3">
+                <div class="flex items-center justify-between p-3 bg-gray-50 rounded-xl">
+                    <div class="flex items-center">
+                        <span class="text-xl mr-3">🌅</span>
+                        <span class="text-gray-700">起床時間</span>
+                    </div>
+                    <span id="wakeTime" class="text-gray-600 font-medium">07:30</span>
+                </div>
+                
+                <div class="flex items-center justify-between p-3 bg-gray-50 rounded-xl">
+                    <div class="flex items-center">
+                        <span class="text-xl mr-3">🍽️</span>
+                        <span class="text-gray-700">用餐記錄</span>
+                    </div>
+                    <span id="mealStatus" class="text-green-600 font-medium">已用餐</span>
+                </div>
+                
+                <div class="flex items-center justify-between p-3 bg-gray-50 rounded-xl">
+                    <div class="flex items-center">
+                        <span class="text-xl mr-3">🏠</span>
+                        <span class="text-gray-700">居家活動</span>
+                    </div>
+                    <span id="homeActivity" class="text-blue-600 font-medium">正常</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 感測器控制 -->
+        <div class="bg-white rounded-2xl shadow-lg p-6 mb-6">
+            <h2 class="text-lg font-semibold text-gray-800 mb-4">感測器設定</h2>
+            <div class="space-y-3">
+                <button id="enableStepCounter" class="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-xl transition-colors duration-200">
+                    🚶‍♂️ 啟用步數計算
+                </button>
+                <button id="enableHeartRate" class="w-full bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-xl transition-colors duration-200">
+                    💓 啟用心率監測
+                </button>
+                <div id="sensorStatus" class="text-sm text-gray-600 text-center mt-2">
+                    點擊按鈕啟用真實感測器
+                </div>
+            </div>
+        </div>
+
+        <!-- 緊急按鈕 -->
+        <div class="bg-white rounded-2xl shadow-lg p-6 mb-6">
+            <h2 class="text-lg font-semibold text-gray-800 mb-4">緊急聯絡</h2>
+            <button id="emergencyBtn" class="w-full bg-red-500 hover:bg-red-600 text-white font-bold py-4 px-6 rounded-xl text-lg transition-colors duration-200">
+                🚨 緊急求助
+            </button>
+        </div>
+
+        <!-- 守護者聯絡 -->
+        <div class="bg-white rounded-2xl shadow-lg p-6">
+            <h2 class="text-lg font-semibold text-gray-800 mb-4">守護者</h2>
+            <div class="space-y-3">
+                <div class="flex items-center justify-between p-3 bg-blue-50 rounded-xl">
+                    <div class="flex items-center">
+                        <div class="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center text-white font-semibold mr-3">李</div>
+                        <div>
+                            <div class="font-medium text-gray-800">李小明</div>
+                            <div class="text-sm text-gray-600">兒子</div>
+                        </div>
+                    </div>
+                    <button class="text-blue-500 hover:text-blue-600 text-xl">📞</button>
+                </div>
+                
+                <div class="flex items-center justify-between p-3 bg-green-50 rounded-xl">
+                    <div class="flex items-center">
+                        <div class="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center text-white font-semibold mr-3">王</div>
+                        <div>
+                            <div class="font-medium text-gray-800">王護理師</div>
+                            <div class="text-sm text-gray-600">照護員</div>
+                        </div>
+                    </div>
+                    <button class="text-green-500 hover:text-green-600 text-xl">📞</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 守護者介面 -->
+    <div id="guardianApp" class="container mx-auto px-4 py-6 max-w-md hidden">
+        <!-- 守護者標題 -->
+        <div class="bg-white rounded-2xl shadow-lg p-6 mb-6">
+            <div class="flex items-center justify-between">
+                <div>
+                    <h1 class="text-2xl font-bold text-gray-800">守護者介面</h1>
+                    <p class="text-gray-600 text-sm">監護 - 李奶奶</p>
+                </div>
+                <button id="switchToMain" class="text-blue-500 hover:text-blue-600">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- 警報狀態 -->
+        <div class="bg-white rounded-2xl shadow-lg p-6 mb-6">
+            <h2 class="text-lg font-semibold text-gray-800 mb-4">警報狀態</h2>
+            <div id="alertStatus" class="p-4 bg-green-50 border-l-4 border-green-500 rounded-r-xl">
+                <div class="flex items-center">
+                    <span class="text-green-500 text-xl mr-3">✅</span>
+                    <div>
+                        <div class="font-medium text-green-800">狀態正常</div>
+                        <div class="text-sm text-green-600">最後更新：剛剛</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 活動摘要 -->
+        <div class="bg-white rounded-2xl shadow-lg p-6 mb-6">
+            <h2 class="text-lg font-semibold text-gray-800 mb-4">今日活動摘要</h2>
+            <div class="space-y-4">
+                <div class="flex items-center justify-between">
+                    <span class="text-gray-700">起床時間</span>
+                    <span class="font-medium text-gray-800">07:30 ✅</span>
+                </div>
+                <div class="flex items-center justify-between">
+                    <span class="text-gray-700">活動量</span>
+                    <span class="font-medium text-blue-600">3,247 步</span>
+                </div>
+                <div class="flex items-center justify-between">
+                    <span class="text-gray-700">用餐狀況</span>
+                    <span class="font-medium text-green-600">正常 ✅</span>
+                </div>
+                <div class="flex items-center justify-between">
+                    <span class="text-gray-700">心率範圍</span>
+                    <span class="font-medium text-green-600">65-78 bpm</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 異常偵測設定 -->
+        <div class="bg-white rounded-2xl shadow-lg p-6">
+            <h2 class="text-lg font-semibold text-gray-800 mb-4">監護設定</h2>
+            <div class="space-y-4">
+                <div class="flex items-center justify-between">
+                    <span class="text-gray-700">活動異常警報</span>
+                    <label class="relative inline-flex items-center cursor-pointer">
+                        <input type="checkbox" checked class="sr-only peer">
+                        <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
+                    </label>
+                </div>
+                
+                <div class="flex items-center justify-between">
+                    <span class="text-gray-700">心率異常警報</span>
+                    <label class="relative inline-flex items-center cursor-pointer">
+                        <input type="checkbox" checked class="sr-only peer">
+                        <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
+                    </label>
+                </div>
+                
+                <div class="flex items-center justify-between">
+                    <span class="text-gray-700">長時間無活動警報</span>
+                    <label class="relative inline-flex items-center cursor-pointer">
+                        <input type="checkbox" checked class="sr-only peer">
+                        <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 警報彈窗 -->
+    <div id="alertModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 hidden z-50">
+        <div class="bg-white rounded-2xl p-6 max-w-sm w-full slide-in">
+            <div class="text-center">
+                <div class="text-6xl mb-4">🚨</div>
+                <h3 class="text-xl font-bold text-red-600 mb-2">緊急警報</h3>
+                <p class="text-gray-700 mb-6">已發送緊急通知給所有守護者</p>
+                <button id="closeAlert" class="w-full bg-red-500 hover:bg-red-600 text-white font-bold py-3 px-6 rounded-xl transition-colors duration-200">
+                    確認
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 安裝提示橫幅 -->
+    <div id="installBanner" class="fixed top-0 left-0 right-0 bg-blue-600 text-white p-3 z-50 hidden">
+        <div class="flex items-center justify-between max-w-md mx-auto">
+            <div class="flex items-center">
+                <span class="text-lg mr-2">📱</span>
+                <div class="text-sm">
+                    <div class="font-medium">安裝到手機</div>
+                    <div class="text-blue-100 text-xs">點擊安裝，像真正的APP一樣使用</div>
+                </div>
+            </div>
+            <div class="flex space-x-2">
+                <button id="installApp" class="bg-white text-blue-600 px-3 py-1 rounded-lg text-sm font-medium">
+                    安裝
+                </button>
+                <button id="dismissInstall" class="text-blue-100 hover:text-white">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 安裝說明彈窗 -->
+    <div id="installModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 hidden z-50">
+        <div class="bg-white rounded-2xl p-6 max-w-sm w-full slide-in">
+            <div class="text-center">
+                <div class="text-6xl mb-4">📱</div>
+                <h3 class="text-xl font-bold text-gray-800 mb-4">安裝到手機</h3>
+                
+                <!-- iOS 安裝說明 -->
+                <div id="iosInstructions" class="text-left space-y-3 mb-6 hidden">
+                    <p class="text-gray-700 text-sm font-medium">iPhone/iPad 安裝步驟：</p>
+                    <div class="space-y-2 text-sm text-gray-600">
+                        <div class="flex items-center">
+                            <span class="w-6 h-6 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-xs font-bold mr-3">1</span>
+                            <span>點擊 Safari 底部的「分享」按鈕 📤</span>
+                        </div>
+                        <div class="flex items-center">
+                            <span class="w-6 h-6 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-xs font-bold mr-3">2</span>
+                            <span>選擇「加入主畫面」</span>
+                        </div>
+                        <div class="flex items-center">
+                            <span class="w-6 h-6 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-xs font-bold mr-3">3</span>
+                            <span>點擊「新增」完成安裝</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Android 安裝說明 -->
+                <div id="androidInstructions" class="text-left space-y-3 mb-6 hidden">
+                    <p class="text-gray-700 text-sm font-medium">Android 安裝步驟：</p>
+                    <div class="space-y-2 text-sm text-gray-600">
+                        <div class="flex items-center">
+                            <span class="w-6 h-6 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-xs font-bold mr-3">1</span>
+                            <span>點擊 Chrome 右上角選單 ⋮</span>
+                        </div>
+                        <div class="flex items-center">
+                            <span class="w-6 h-6 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-xs font-bold mr-3">2</span>
+                            <span>選擇「安裝應用程式」</span>
+                        </div>
+                        <div class="flex items-center">
+                            <span class="w-6 h-6 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-xs font-bold mr-3">3</span>
+                            <span>點擊「安裝」完成</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 通用說明 -->
+                <div id="generalInstructions" class="text-left space-y-3 mb-6">
+                    <p class="text-gray-700 text-sm font-medium">安裝後的優點：</p>
+                    <div class="space-y-1 text-sm text-gray-600">
+                        <div class="flex items-center">
+                            <span class="text-green-500 mr-2">✓</span>
+                            <span>像真正的APP一樣使用</span>
+                        </div>
+                        <div class="flex items-center">
+                            <span class="text-green-500 mr-2">✓</span>
+                            <span>可離線使用部分功能</span>
+                        </div>
+                        <div class="flex items-center">
+                            <span class="text-green-500 mr-2">✓</span>
+                            <span>更快的啟動速度</span>
+                        </div>
+                        <div class="flex items-center">
+                            <span class="text-green-500 mr-2">✓</span>
+                            <span>全螢幕體驗</span>
+                        </div>
+                    </div>
+                </div>
+
+                <button id="closeInstallModal" class="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-xl transition-colors duration-200">
+                    我知道了
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 底部導航 -->
+    <div class="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 px-4 py-2">
+        <div class="flex justify-center space-x-8 max-w-md mx-auto">
+            <button id="showMain" class="flex flex-col items-center py-2 text-blue-500">
+                <span class="text-xl mb-1">🏠</span>
+                <span class="text-xs">主頁</span>
+            </button>
+            <button id="showGuardian" class="flex flex-col items-center py-2 text-gray-400 hover:text-blue-500">
+                <span class="text-xl mb-1">👥</span>
+                <span class="text-xs">守護者</span>
+            </button>
+            <button id="showInstallGuide" class="flex flex-col items-center py-2 text-gray-400 hover:text-green-500">
+                <span class="text-xl mb-1">📱</span>
+                <span class="text-xs">安裝APP</span>
+            </button>
+            <button id="simulateAlert" class="flex flex-col items-center py-2 text-gray-400 hover:text-orange-500">
+                <span class="text-xl mb-1">⚠️</span>
+                <span class="text-xs">測試警報</span>
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // 應用狀態管理
+        let currentView = 'main';
+        let activityBaseline = {
+            wakeTime: '07:30',
+            sleepTime: '22:00',
+            dailySteps: 3000,
+            heartRateRange: [60, 80]
+        };
+        
+        let currentData = {
+            steps: 3247,
+            heartRate: 72,
+            lastActivity: new Date(),
+            isActive: true
+        };
+
+        // DOM 元素
+        const mainApp = document.getElementById('mainApp');
+        const guardianApp = document.getElementById('guardianApp');
+        const alertModal = document.getElementById('alertModal');
+        const installModal = document.getElementById('installModal');
+        const installBanner = document.getElementById('installBanner');
+        const emergencyBtn = document.getElementById('emergencyBtn');
+        const enableStepCounterBtn = document.getElementById('enableStepCounter');
+        const enableHeartRateBtn = document.getElementById('enableHeartRate');
+        const sensorStatus = document.getElementById('sensorStatus');
+        const showMainBtn = document.getElementById('showMain');
+        const showGuardianBtn = document.getElementById('showGuardian');
+        const switchToMainBtn = document.getElementById('switchToMain');
+        const simulateAlertBtn = document.getElementById('simulateAlert');
+        const showInstallGuideBtn = document.getElementById('showInstallGuide');
+        const closeAlertBtn = document.getElementById('closeAlert');
+        const closeInstallModalBtn = document.getElementById('closeInstallModal');
+        const installAppBtn = document.getElementById('installApp');
+        const dismissInstallBtn = document.getElementById('dismissInstall');
+
+        // PWA 安裝相關
+        let deferredPrompt;
+        let isInstallable = false;
+
+        // 切換視圖功能
+        function switchView(view) {
+            currentView = view;
+            
+            if (view === 'main') {
+                mainApp.classList.remove('hidden');
+                guardianApp.classList.add('hidden');
+                showMainBtn.classList.add('text-blue-500');
+                showMainBtn.classList.remove('text-gray-400');
+                showGuardianBtn.classList.add('text-gray-400');
+                showGuardianBtn.classList.remove('text-blue-500');
+            } else if (view === 'guardian') {
+                mainApp.classList.add('hidden');
+                guardianApp.classList.remove('hidden');
+                showGuardianBtn.classList.add('text-blue-500');
+                showGuardianBtn.classList.remove('text-gray-400');
+                showMainBtn.classList.add('text-gray-400');
+                showMainBtn.classList.remove('text-blue-500');
+            }
+        }
+
+        // 異常偵測算法
+        function detectAnomalies() {
+            const alerts = [];
+            const now = new Date();
+            const timeSinceLastActivity = (now - currentData.lastActivity) / (1000 * 60); // 分鐘
+
+            // 檢查長時間無活動
+            if (timeSinceLastActivity > 120) { // 2小時無活動
+                alerts.push({
+                    type: 'inactivity',
+                    message: '長時間無活動偵測',
+                    severity: 'high'
+                });
+            }
+
+            // 檢查心率異常
+            if (currentData.heartRate < activityBaseline.heartRateRange[0] || 
+                currentData.heartRate > activityBaseline.heartRateRange[1]) {
+                alerts.push({
+                    type: 'heartRate',
+                    message: '心率異常',
+                    severity: 'medium'
+                });
+            }
+
+            // 檢查活動量異常
+            if (currentData.steps < activityBaseline.dailySteps * 0.3) {
+                alerts.push({
+                    type: 'lowActivity',
+                    message: '活動量過低',
+                    severity: 'low'
+                });
+            }
+
+            return alerts;
+        }
+
+        // 發送警報給守護者
+        function sendAlertToGuardians(alertType, message) {
+            // 模擬 Firebase Cloud Functions 警報發送
+            console.log(`發送警報: ${alertType} - ${message}`);
+            
+            // 更新守護者介面的警報狀態
+            const alertStatus = document.getElementById('alertStatus');
+            alertStatus.className = 'p-4 bg-red-50 border-l-4 border-red-500 rounded-r-xl';
+            alertStatus.innerHTML = `
+                <div class="flex items-center">
+                    <span class="text-red-500 text-xl mr-3">🚨</span>
+                    <div>
+                        <div class="font-medium text-red-800">${message}</div>
+                        <div class="text-sm text-red-600">警報時間：${new Date().toLocaleTimeString('zh-TW')}</div>
+                    </div>
+                </div>
+            `;
+
+            // 3秒後恢復正常狀態（模擬處理完成）
+            setTimeout(() => {
+                alertStatus.className = 'p-4 bg-green-50 border-l-4 border-green-500 rounded-r-xl';
+                alertStatus.innerHTML = `
+                    <div class="flex items-center">
+                        <span class="text-green-500 text-xl mr-3">✅</span>
+                        <div>
+                            <div class="font-medium text-green-800">狀態正常</div>
+                            <div class="text-sm text-green-600">最後更新：剛剛</div>
+                        </div>
+                    </div>
+                `;
+            }, 3000);
+        }
+
+        // 真實感測器數據獲取
+        let sensorData = {
+            accelerometer: null,
+            gyroscope: null,
+            stepCounter: 0,
+            isTracking: false
+        };
+
+        // 請求感測器權限
+        async function requestSensorPermissions() {
+            try {
+                // 請求動作感測器權限（iOS 13+）
+                if (typeof DeviceMotionEvent !== 'undefined' && typeof DeviceMotionEvent.requestPermission === 'function') {
+                    const permission = await DeviceMotionEvent.requestPermission();
+                    if (permission === 'granted') {
+                        console.log('動作感測器權限已獲得');
+                        return true;
+                    }
+                }
+                return true; // Android 或較舊的 iOS 版本
+            } catch (error) {
+                console.log('感測器權限請求失敗:', error);
+                return false;
+            }
+        }
+
+        // 初始化加速度計（用於步數計算）
+        function initAccelerometer() {
+            if (window.DeviceMotionEvent) {
+                window.addEventListener('devicemotion', handleMotionEvent);
+                sensorData.isTracking = true;
+                console.log('加速度計已啟動');
+            } else {
+                console.log('設備不支援加速度計');
+            }
+        }
+
+        // 處理動作事件（步數偵測）
+        let lastStepTime = 0;
+        let stepThreshold = 1.2; // 步數偵測閾值
+        let stepBuffer = [];
+
+        function handleMotionEvent(event) {
+            if (!event.accelerationIncludingGravity) return;
+
+            const { x, y, z } = event.accelerationIncludingGravity;
+            const acceleration = Math.sqrt(x*x + y*y + z*z);
+            
+            // 簡單的步數偵測算法
+            const currentTime = Date.now();
+            stepBuffer.push({ acceleration, time: currentTime });
+            
+            // 保持最近1秒的數據
+            stepBuffer = stepBuffer.filter(data => currentTime - data.time < 1000);
+            
+            // 偵測步數（尋找加速度峰值）
+            if (stepBuffer.length > 10) {
+                const avgAcceleration = stepBuffer.reduce((sum, data) => sum + data.acceleration, 0) / stepBuffer.length;
+                
+                if (acceleration > avgAcceleration + stepThreshold && 
+                    currentTime - lastStepTime > 300) { // 最少間隔300ms
+                    sensorData.stepCounter++;
+                    lastStepTime = currentTime;
+                    currentData.lastActivity = new Date();
+                    
+                    // 更新UI
+                    currentData.steps = sensorData.stepCounter;
+                    document.getElementById('stepCount').textContent = currentData.steps.toLocaleString();
+                }
+            }
+        }
+
+        // 心率監測（使用相機和閃光燈）
+        let heartRateMonitor = {
+            isMonitoring: false,
+            videoElement: null,
+            canvas: null,
+            context: null,
+            samples: [],
+            sampleRate: 30 // fps
+        };
+
+        async function initHeartRateMonitor() {
+            try {
+                // 請求相機權限
+                const stream = await navigator.mediaDevices.getUserMedia({
+                    video: { 
+                        facingMode: 'environment', // 後置相機
+                        width: { ideal: 320 },
+                        height: { ideal: 240 }
+                    }
+                });
+
+                // 創建隱藏的視頻元素
+                heartRateMonitor.videoElement = document.createElement('video');
+                heartRateMonitor.videoElement.srcObject = stream;
+                heartRateMonitor.videoElement.play();
+
+                // 創建 canvas 用於圖像處理
+                heartRateMonitor.canvas = document.createElement('canvas');
+                heartRateMonitor.context = heartRateMonitor.canvas.getContext('2d');
+
+                // 嘗試開啟閃光燈
+                const track = stream.getVideoTracks()[0];
+                if (track.getCapabilities && track.getCapabilities().torch) {
+                    await track.applyConstraints({
+                        advanced: [{ torch: true }]
+                    });
+                }
+
+                heartRateMonitor.isMonitoring = true;
+                startHeartRateDetection();
+                console.log('心率監測已啟動');
+
+            } catch (error) {
+                console.log('心率監測初始化失敗:', error);
+                // 回退到模擬數據
+                useSimulatedHeartRate();
+            }
+        }
+
+        function startHeartRateDetection() {
+            if (!heartRateMonitor.isMonitoring) return;
+
+            const video = heartRateMonitor.videoElement;
+            const canvas = heartRateMonitor.canvas;
+            const context = heartRateMonitor.context;
+
+            canvas.width = video.videoWidth || 320;
+            canvas.height = video.videoHeight || 240;
+
+            // 每33ms採樣一次（30fps）
+            const sampleInterval = setInterval(() => {
+                if (!heartRateMonitor.isMonitoring) {
+                    clearInterval(sampleInterval);
+                    return;
+                }
+
+                // 繪製視頻幀到 canvas
+                context.drawImage(video, 0, 0, canvas.width, canvas.height);
+                
+                // 獲取圖像數據
+                const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
+                const data = imageData.data;
+
+                // 計算平均紅色值（血液中的血紅蛋白會吸收綠光，反射紅光）
+                let redSum = 0;
+                for (let i = 0; i < data.length; i += 4) {
+                    redSum += data[i]; // 紅色通道
+                }
+                const avgRed = redSum / (data.length / 4);
+
+                // 記錄樣本
+                heartRateMonitor.samples.push({
+                    value: avgRed,
+                    timestamp: Date.now()
+                });
+
+                // 保持最近30秒的樣本
+                const thirtySecondsAgo = Date.now() - 30000;
+                heartRateMonitor.samples = heartRateMonitor.samples.filter(
+                    sample => sample.timestamp > thirtySecondsAgo
+                );
+
+                // 每10秒計算一次心率
+                if (heartRateMonitor.samples.length >= 300) { // 10秒 * 30fps
+                    calculateHeartRate();
+                }
+
+            }, 1000 / heartRateMonitor.sampleRate);
+        }
+
+        function calculateHeartRate() {
+            const samples = heartRateMonitor.samples;
+            if (samples.length < 150) return; // 至少需要5秒的數據
+
+            // 使用簡單的峰值檢測算法
+            const values = samples.map(s => s.value);
+            const mean = values.reduce((a, b) => a + b) / values.length;
+            
+            // 找出峰值
+            let peaks = 0;
+            let lastPeakTime = 0;
+            
+            for (let i = 1; i < samples.length - 1; i++) {
+                const current = values[i];
+                const prev = values[i - 1];
+                const next = values[i + 1];
+                
+                // 檢測峰值（當前值大於前後值且大於平均值）
+                if (current > prev && current > next && current > mean * 1.02) {
+                    const currentTime = samples[i].timestamp;
+                    
+                    // 確保峰值間隔合理（300ms-2000ms，對應200-30 BPM）
+                    if (currentTime - lastPeakTime > 300 && currentTime - lastPeakTime < 2000) {
+                        peaks++;
+                    }
+                    lastPeakTime = currentTime;
+                }
+            }
+
+            // 計算心率（每分鐘心跳數）
+            const timeSpan = (samples[samples.length - 1].timestamp - samples[0].timestamp) / 1000; // 秒
+            const heartRate = Math.round((peaks / timeSpan) * 60);
+
+            // 驗證心率是否在合理範圍內
+            if (heartRate >= 40 && heartRate <= 200) {
+                currentData.heartRate = heartRate;
+                document.getElementById('heartRate').textContent = `${heartRate} bpm`;
+                console.log(`檢測到心率: ${heartRate} BPM`);
+            }
+        }
+
+        // 回退到模擬心率（當無法使用相機時）
+        function useSimulatedHeartRate() {
+            setInterval(() => {
+                // 基於活動量調整心率
+                const baseHeartRate = 70;
+                const activityFactor = Math.min(currentData.steps / 100, 30); // 每100步增加心率
+                const randomVariation = (Math.random() - 0.5) * 6; // ±3 BPM隨機變化
+                
+                currentData.heartRate = Math.round(baseHeartRate + activityFactor + randomVariation);
+                currentData.heartRate = Math.max(50, Math.min(120, currentData.heartRate));
+                
+                document.getElementById('heartRate').textContent = `${currentData.heartRate} bpm`;
+            }, 5000); // 每5秒更新一次
+        }
+
+        // 整合健康數據更新
+        function updateHealthData() {
+            // 如果沒有使用真實感測器，則使用模擬數據
+            if (!sensorData.isTracking) {
+                currentData.steps += Math.floor(Math.random() * 5);
+                document.getElementById('stepCount').textContent = currentData.steps.toLocaleString();
+            }
+
+            // 更新最後活動時間
+            if (Math.random() > 0.7) {
+                currentData.lastActivity = new Date();
+            }
+
+            // 執行異常偵測
+            const alerts = detectAnomalies();
+            if (alerts.length > 0) {
+                alerts.forEach(alert => {
+                    if (alert.severity === 'high') {
+                        sendAlertToGuardians(alert.type, alert.message);
+                    }
+                });
+            }
+        }
+
+        // PWA 安裝功能
+        function detectDevice() {
+            const userAgent = navigator.userAgent.toLowerCase();
+            if (/iphone|ipad|ipod/.test(userAgent)) {
+                return 'ios';
+            } else if (/android/.test(userAgent)) {
+                return 'android';
+            }
+            return 'other';
+        }
+
+        function showInstallInstructions() {
+            const device = detectDevice();
+            const iosInstructions = document.getElementById('iosInstructions');
+            const androidInstructions = document.getElementById('androidInstructions');
+            
+            // 隱藏所有說明
+            iosInstructions.classList.add('hidden');
+            androidInstructions.classList.add('hidden');
+            
+            // 根據設備顯示對應說明
+            if (device === 'ios') {
+                iosInstructions.classList.remove('hidden');
+            } else if (device === 'android') {
+                androidInstructions.classList.remove('hidden');
+            }
+            
+            installModal.classList.remove('hidden');
+        }
+
+        function checkInstallability() {
+            // 檢查是否已經安裝
+            if (window.matchMedia('(display-mode: standalone)').matches) {
+                return false; // 已經安裝
+            }
+            
+            // 檢查是否支援 PWA
+            if ('serviceWorker' in navigator && 'PushManager' in window) {
+                return true;
+            }
+            
+            return false;
+        }
+
+        // 監聽 PWA 安裝提示事件
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            isInstallable = true;
+            
+            // 顯示安裝橫幅（如果用戶還沒有拒絕過）
+            if (!localStorage.getItem('installDismissed')) {
+                setTimeout(() => {
+                    installBanner.classList.remove('hidden');
+                }, 3000); // 3秒後顯示
+            }
+        });
+
+        // 監聽安裝完成事件
+        window.addEventListener('appinstalled', () => {
+            console.log('PWA 安裝成功');
+            installBanner.classList.add('hidden');
+            deferredPrompt = null;
+            isInstallable = false;
+        });
+
+        // 事件監聽器
+        emergencyBtn.addEventListener('click', () => {
+            alertModal.classList.remove('hidden');
+            sendAlertToGuardians('emergency', '緊急求助按鈕被按下');
+        });
+
+        // 感測器啟用按鈕
+        enableStepCounterBtn.addEventListener('click', async () => {
+            sensorStatus.textContent = '正在啟用步數計算...';
+            
+            const hasPermission = await requestSensorPermissions();
+            if (hasPermission) {
+                initAccelerometer();
+                enableStepCounterBtn.textContent = '✅ 步數計算已啟用';
+                enableStepCounterBtn.disabled = true;
+                enableStepCounterBtn.classList.add('bg-gray-400');
+                enableStepCounterBtn.classList.remove('bg-blue-500', 'hover:bg-blue-600');
+                sensorStatus.textContent = '步數計算使用手機加速度計，請將手機隨身攜帶';
+            } else {
+                sensorStatus.textContent = '無法啟用步數計算，將使用模擬數據';
+            }
+        });
+
+        enableHeartRateBtn.addEventListener('click', async () => {
+            sensorStatus.textContent = '正在啟用心率監測...';
+            
+            try {
+                await initHeartRateMonitor();
+                enableHeartRateBtn.textContent = '✅ 心率監測已啟用';
+                enableHeartRateBtn.disabled = true;
+                enableHeartRateBtn.classList.add('bg-gray-400');
+                enableHeartRateBtn.classList.remove('bg-green-500', 'hover:bg-green-600');
+                sensorStatus.textContent = '心率監測使用相機和閃光燈，請用手指輕壓鏡頭';
+            } catch (error) {
+                sensorStatus.textContent = '無法啟用心率監測，將使用智能模擬數據';
+                useSimulatedHeartRate();
+            }
+        });
+
+        closeAlertBtn.addEventListener('click', () => {
+            alertModal.classList.add('hidden');
+        });
+
+        closeInstallModalBtn.addEventListener('click', () => {
+            installModal.classList.add('hidden');
+        });
+
+        showMainBtn.addEventListener('click', () => switchView('main'));
+        showGuardianBtn.addEventListener('click', () => switchView('guardian'));
+        switchToMainBtn.addEventListener('click', () => switchView('main'));
+
+        showInstallGuideBtn.addEventListener('click', () => {
+            showInstallInstructions();
+        });
+
+        installAppBtn.addEventListener('click', async () => {
+            if (deferredPrompt && isInstallable) {
+                // 使用瀏覽器原生安裝提示
+                deferredPrompt.prompt();
+                const { outcome } = await deferredPrompt.userChoice;
+                
+                if (outcome === 'accepted') {
+                    console.log('用戶接受安裝');
+                } else {
+                    console.log('用戶拒絕安裝');
+                }
+                
+                deferredPrompt = null;
+                isInstallable = false;
+                installBanner.classList.add('hidden');
+            } else {
+                // 顯示手動安裝說明
+                showInstallInstructions();
+            }
+        });
+
+        dismissInstallBtn.addEventListener('click', () => {
+            installBanner.classList.add('hidden');
+            localStorage.setItem('installDismissed', 'true');
+        });
+
+        simulateAlertBtn.addEventListener('click', () => {
+            // 模擬異常情況
+            currentData.heartRate = 95; // 設置異常心率
+            currentData.lastActivity = new Date(Date.now() - 3 * 60 * 60 * 1000); // 3小時前
+            
+            const alerts = detectAnomalies();
+            if (alerts.length > 0) {
+                sendAlertToGuardians('simulation', '模擬異常偵測警報');
+            }
+            
+            // 切換到守護者視圖查看警報
+            setTimeout(() => switchView('guardian'), 500);
+        });
+
+        // 初始化應用
+        function initApp() {
+            switchView('main');
+            
+            // 檢查安裝狀態
+            if (checkInstallability()) {
+                console.log('應用可以安裝');
+            }
+            
+            // 每30秒更新一次健康數據
+            setInterval(updateHealthData, 30000);
+            
+            // 立即更新一次數據
+            updateHealthData();
+            
+            // 如果是第一次訪問，顯示安裝提示
+            if (!localStorage.getItem('firstVisit')) {
+                setTimeout(() => {
+                    if (!window.matchMedia('(display-mode: standalone)').matches) {
+                        showInstallInstructions();
+                    }
+                }, 5000);
+                localStorage.setItem('firstVisit', 'true');
+            }
+        }
+
+        // 啟動應用
+        initApp();
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'974bb094c74ef1dc',t:'MTc1NjEzMTIwMy4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
